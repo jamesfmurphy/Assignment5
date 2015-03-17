@@ -14,9 +14,13 @@ server = http.createServer(function(req, res){
 	var results = {	outcome: outcome, wins: wins, losses: losses, ties: ties };
 	if (req.method == 'GET' && req.url == '/'){
 	res.writeHead(200, {"Content-Type": "text/html"});
+	// The following book was strongly used for this code:
+	//http://proquest.safaribooksonline.com.lib-proxy.fullerton.edu/book/programming/javascript/9781484201879/chapter-6-getting-started-with-http/sec9_html_6
 	fs.createReadStream('index.html').pipe(res);
 	}
 	else if (req.method == 'POST' && req.url == '/play/rock'){
+		// This code is from the following website:
+		// http://stackoverflow.com/questions/16065579/generate-a-random-word-from-an-array-and-then-print-it-to-the-console-log-in-a-f
 		var choice = choices[Math.floor(Math.random() * choices.length)];
 		res.writeHead(200, {"Content-Type": "application/json" });
 		if (choice === 'Scissors' || choice === 'Lizard'){
@@ -106,10 +110,7 @@ server = http.createServer(function(req, res){
 		res.write(JSON.stringify(results));
 		res.end();
 	}
-	
-	
 		
-	
 	//console.log(results);
 	
 	
